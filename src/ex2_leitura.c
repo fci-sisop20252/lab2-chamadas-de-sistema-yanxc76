@@ -1,3 +1,14 @@
+/*
+ * Exercício 2 - Leitura Básica de Arquivo
+ * 
+ * OBJETIVO: Implementar leitura de arquivo usando syscalls
+ * 
+ * TAREFA: Complete os TODOs marcados abaixo
+ * 1. Compile: gcc src/ex2_leitura.c -o ex2_leitura
+ * 2. Execute: ./ex2_leitura
+ * 3. Observe: strace -e openat,read,close ./ex2_leitura
+ */
+
 #include <fcntl.h>    // Para open() e flags O_RDONLY
 #include <unistd.h>   // Para read() e close()
 #include <stdio.h>    // Para printf() e perror()
@@ -17,6 +28,10 @@ int main() {
      * Use open() com O_RDONLY
      */
     fd = open("dados/teste1.txt", O_RDONLY);
+    if (fd == -1) {
+        perror("Erro ao abrir arquivo");
+        return 1;
+    }
     
     /*
      * TODO 2: Verificar se a abertura foi bem-sucedida
@@ -34,7 +49,8 @@ int main() {
      * Use read() para ler até (BUFFER_SIZE - 1) bytes
      */
     bytes_lidos = read(fd, buffer, BUFFER_SIZE - 1);
-    
+    buffer[bytes_lidos] = '\0';
+
     /*
      * TODO 4: Verificar se a leitura foi bem-sucedida
      */
@@ -49,7 +65,7 @@ int main() {
      * Para tratar o buffer como string
      */
     buffer[bytes_lidos] = '\0';
-    
+
     // Exibir resultados
     printf("Bytes lidos: %ld\n", bytes_lidos);
     printf("Conteúdo:\n%s\n", buffer);
@@ -64,7 +80,7 @@ int main() {
     }
     
     printf("Arquivo fechado!\n\n");
-    printf("Execute: strace -e open,read,close ./ex2_leitura\n");
+    printf("Execute: strace -e openat,read,close ./ex2_leitura\n");
     
     return 0;
 }
