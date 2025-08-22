@@ -214,9 +214,9 @@ Porque ele fez apenas 6 operações, com um buffer relativamente eficiente (256 
 
 Certifique-se de ter:
 
-- [ ] Todos os códigos com TODOs completados
-- [ ] Traces salvos em `traces/`
-- [ ] Este relatório preenchido como `RELATORIO.md`
+- [x] Todos os códigos com TODOs completados
+- [x] Traces salvos em `traces/`
+- [x] Este relatório preenchido como `RELATORIO.md`
 
 ```bash
 strace -e write -o traces/ex1a_trace.txt ./ex1a_printf
